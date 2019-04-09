@@ -1,0 +1,37 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - Flaskr</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<nav>
+    <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <h1><a href="{{ url_for('index') }}">King Shop</a></h1>
+    </div>
+    <ul class="nav navbar-nav">
+    {% if g.user %}
+      <li><span><font size="6"><font color="#FF00FF">{{ g.user['username'] }}</font></font></span>
+      <li><a href="{{ url_for('auth.logout') }}"><font size="6">Log Out</font></a>
+    {% else %}
+      <li><a href="{{ url_for('auth.register') }}"><font size="6">Register</font></a>
+      <li><a href="{{ url_for('auth.login') }}"><font size="6">Log In</font></a>
+    {% endif %}
+      <li><a href="{{ url_for('auth.about') }}"><font size="6">About Us</font></a>
+  </ul>
+  </div>
+</nav>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+  <body style="background-color:powderblue;">
+</section>
